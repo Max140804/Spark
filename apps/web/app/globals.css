@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sora: "Sora", system-ui, sans-serif;
+    --font-inter: "Inter", system-ui, sans-serif;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white text-spark-indigo-900 font-body;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-spark-amber-400 ring-offset-2 ring-offset-white rounded-md;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .spark-gradient {
+    background: linear-gradient(135deg, #FFB020 0%, #22D3EE 100%);
+  }
+  .spark-glow {
+    box-shadow: 0 0 32px -8px rgba(255, 176, 32, 0.5);
+  }
+}

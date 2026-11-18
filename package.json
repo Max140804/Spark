@@ -1,0 +1,23 @@
+{
+  "name": "spark",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "corepack pnpm --filter web dev",
+    "build": "corepack pnpm --filter web build",
+    "start": "corepack pnpm --filter web start",
+    "db:generate": "corepack pnpm --filter web prisma generate",
+    "db:migrate": "corepack pnpm --filter web prisma migrate deploy",
+    "db:migrate:dev": "corepack pnpm --filter web prisma migrate dev",
+    "db:seed": "corepack pnpm --filter web exec tsx prisma/seed.ts",
+    "lint": "corepack pnpm --filter web lint",
+    "test": "corepack pnpm --filter web test",
+    "check:production-env": "corepack pnpm --filter web check:production-env"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.33"
+    }
+  }
+}
