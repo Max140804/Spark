@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.max140804.spark",
+      "sha256_cert_fingerprints": [
+        "29:52:D3:E3:5D:A3:E6:86:6F:37:B1:1A:4C:B8:F0:8F:72:B0:6B:DD:1C:D3:64:5F:5A:7B:A7:72:58:D5:5E:11"
+      ]
+    }
+  }
+]
