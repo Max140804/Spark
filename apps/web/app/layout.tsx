@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description:
     "Live, interactive supplementary lessons for Nigerian primary and JSS pupils.",
   manifest: "/manifest.webmanifest",
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+  },
   appleWebApp: { capable: true, title: "SPARK", statusBarStyle: "default" },
 };
 

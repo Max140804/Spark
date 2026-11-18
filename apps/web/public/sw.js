@@ -1,6 +1,6 @@
-const CACHE = "spark-v1";
+const CACHE = "spark-v2";
 const PRECACHE = ["/", "/login", "/offline"];
-const PUBLIC_PAGES = new Set(PRECACHE);
+const PUBLIC_PAGES = new Set(["/", "/login"]);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -31,20 +31,27 @@ self.addEventListener("fetch", (event) => {
   if (!isPublicPage && !isStaticAsset) return;
 
   event.respondWith((async () => {
-    const cached = await caches.match(request);
-    if (cached) return cached;
+    const cache = await caches.open(CACHE);
+
+    if (isStaticAsset) {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+
+      const response = await fetch(request);
+      if (response.ok) await cache.put(request, response.clone());
+      return response;
+    }
 
     try {
-      const response = await fetch(request);
-      if (response.ok) {
-        const cache = await caches.open(CACHE);
-        await cache.put(request, response.clone());
-      }
+      const response = await fetch(request, { cache: "no-cache" });
+      if (response.ok) await cache.put(request, response.clone());
       return response;
     } catch {
-      if (request.mode === "navigate") {
-        return (await caches.match("/offline")) || Response.error();
-      }
+      const cached = await cache.match(request);
+      if (cached) return cached;
+
+      const offlinePage = await cache.match("/offline");
+      if (offlinePage) return offlinePage;
       return Response.error();
     }
   })());
